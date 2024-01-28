@@ -1,9 +1,13 @@
 package com.eguerra;
 
 import com.eguerra.data.Starwars;
+import com.eguerra.data.StreamsDemo;
 import com.eguerra.funcional.MyFuncionalInterface;
 import com.eguerra.funcional.Pickachu;
 import com.eguerra.funcional.Tux;
+
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Hello world!
@@ -13,23 +17,62 @@ public class App
 {
     public static void main( String[] args )
     {
-        // Ejemplo 1
-        doSomethingTrandicional();
-        doSomethingClassic();
-        doSomethingFuncional();
+
+        var ejemplo = 3;
+
+        if (ejemplo == 1) {
+            // Ejemplo 1
+            doSomethingTrandicional();
+            doSomethingClassic();
+            doSomethingFuncional();
 
 
-        var pikachu = new Pickachu();
-        doSomethingHideOrder(pikachu::pika);
-        doSomethingHideOrder(pikachu::impactrueno);
+            var pikachu = new Pickachu();
+            doSomethingHideOrder(pikachu::pika);
+            doSomethingHideOrder(pikachu::impactrueno);
+            return;
+        }
 
-        // Ejemplo 2
+        if (ejemplo == 2) {
+            // Ejemplo 2
 
-        var instanciaStarwars = new Starwars();
-        instanciaStarwars.printTradicionalList();
-        System.out.println("------");
-        instanciaStarwars.removerNotJediWithPredicateFuncion();
-        instanciaStarwars.printClasicList();
+            var instanciaStarwars = new Starwars();
+            instanciaStarwars.printTradicionalList();
+            System.out.println("------");
+            instanciaStarwars.removerNotJediWithPredicateFuncion();
+            instanciaStarwars.printClasicList();
+            return;
+        }
+
+        if (ejemplo == 3)  {
+
+            System.out.println("Iniciando Proceso");
+            var numerosPrimos = StreamsDemo.createRadomList(Integer.valueOf(args[0]))
+                                .parallelStream()
+                                .filter(num -> StreamsDemo.isPrimeNumber(num))
+                                .sorted()
+                                .collect(Collectors.toList());
+
+            System.out.println("Finalizando proceso");
+            System.out.println("Primer numero primo = " + numerosPrimos.stream().findFirst());
+            /*
+            var primos = IntStream.range(0, 100)
+                                    .boxed()
+                                    .filter(num -> StreamsDemo.isPrimeNumber(num))
+                                    .collect(Collectors.toList());
+
+            System.out.println(primos);
+            */
+
+            //var randomNumbers = StreamsDemo.createRadomList(10);
+            //System.out.println("Lista desordeanda");
+            //System.out.println(randomNumbers);
+
+            //System.out.println("Lista ordeanda");
+            //System.out.println(StreamsDemo.sortListClasic(randomNumbers));
+        }
+
+
     }
 
     public  static  void doSomethingTrandicional()
