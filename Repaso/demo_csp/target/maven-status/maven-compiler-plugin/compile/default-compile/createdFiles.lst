@@ -1,0 +1,4 @@
+com\eguerra\App.class
+com\eguerra\CSP.class
+com\eguerra\Constraint.class
+com\eguerra\cspProblems\AustraliaColoringConstraint.class
